@@ -41,31 +41,74 @@ async function loadComics(index, quantity) {
   return result;
 }
 
-(async () => {
-  await fetchLatestComic(); // init latest comic index
+const searchButton = document.querySelector(`#search-submit`);
+const searchValue = document.querySelector(`#comic-search`);
+
+searchComic(null);
+
+searchButton.addEventListener("click", function onButtonClick() {
+  searchComic(getSearchValue());
+});
+
+searchValue.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+
+    searchComic(getSearchValue());
+  }
+});
+
+function getSearchValue() {
+  let c = parseInt(searchValue.value);
+  if (Number.isInteger(c)) console.log(c);
+  else console.log(`not a number: ${c}`);
+
+  // todo: limit number between 1 and latestComicIndex
+  if (isNaN(c)) c = latestComicIndex;
+
+  return c;
+}
+
+async function searchComic(index) {
+  await fetchLatestComic();
   const imageElems = Array.from(
     document.querySelectorAll("img[id*='comic-image']")
   );
-
-  // latest comic: 2488
-  // display 3, middle value = 1 ( 0 1 2 )
-  // 2487 2488 1
-  // display 5, middle value = 2 ( 0 1 2 3 4 )
-  // 2486 2487 2488 0 1
-  ////////////
-  const comics = await loadComics(1, numOfImagesDisplayed);
+  const comics = await loadComics(
+    index === null ? latestComicIndex : index,
+    numOfImagesDisplayed
+  );
   console.log(comics);
-  // const mid = calcMidValue(comicImages.length);
-  // const startingIndex = latestComicIndex - mid;
   imageElems.forEach((c, i) => {
     c.src = comics[i].img;
   });
+}
 
-  // const mid = calcMidValue(comicImages.length);
-  // console.log(comicImages.length);
-  // console.log(`mid: ${mid}`);
-  // comicImages[mid].src = comic.img;
-})();
+// (async () => {
+//   await fetchLatestComic(); // init latest comic index
+//   const imageElems = Array.from(
+//     document.querySelectorAll("img[id*='comic-image']")
+//   );
+
+//   // latest comic: 2488
+//   // display 3, middle value = 1 ( 0 1 2 )
+//   // 2487 2488 1
+//   // display 5, middle value = 2 ( 0 1 2 3 4 )
+//   // 2486 2487 2488 0 1
+//   ////////////
+//   const comics = await loadComics(1, numOfImagesDisplayed);
+//   console.log(comics);
+//   // const mid = calcMidValue(comicImages.length);
+//   // const startingIndex = latestComicIndex - mid;
+//   imageElems.forEach((c, i) => {
+//     c.src = comics[i].img;
+//   });
+
+//   // const mid = calcMidValue(comicImages.length);
+//   // console.log(comicImages.length);
+//   // console.log(`mid: ${mid}`);
+//   // comicImages[mid].src = comic.img;
+// })();
 
 function calcMidValue(length) {
   //only taking into account that length is odd
