@@ -76,7 +76,7 @@ form {
 }
 
 #errorAlert {
-  display: inline-block;
+  display: none; /* inline-block to show */
   background-color: #f0f0f0;
   background-color: #f0f0f0;
   color: rgb(155, 0, 0);
