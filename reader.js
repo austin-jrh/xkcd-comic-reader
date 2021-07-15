@@ -164,7 +164,7 @@ function initImageList() {
     item.className = "column";
     item.innerHTML = `<div class="aComic${i}">
                         <div id="comicTitle">Loading Comic...</div>
-                        <img id="comic-image" src="" alt="temp image ${i}" />
+                        <img id="comic-image" src="loading.gif" alt="temp image ${i}" />
                       </div>`;
     imageList.appendChild(item);
   }

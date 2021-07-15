@@ -6,8 +6,8 @@
     <link href="stylesheet.css" rel="stylesheet" />
   </head>
   <body>
-    <h1>xkcd comic reader</h1>
-    <div id="middleContainer">
+    <div id="topContainer">
+      <h1>xkcd comic reader</h1>
       <ul class="comicNav">
         <li>
           <a href="#" id="first">|<</a>
@@ -30,23 +30,27 @@
         <input type="submit" value="Go" id="search-submit" />
       </form>
       <div id="errorAlert">Error message.</div>
+    </div>
+    <div id="middleContainer">
       <div class="row" id="image-list">
         <div class="aComic0">
           <div id="comicTitle">Loading Comic...</div>
-          <img id="comic-image" src="" alt="image0" />
+          <img id="comic-image" src="loading.gif" alt="image0" />
         </div>
         <div class="aComic1">
           <div id="comicTitle">Loading Comic...</div>
-          <img id="comic-image" src="" alt="image1" />
+          <img id="comic-image" src="loading.gif" alt="image1" />
         </div>
         <div class="aComic2">
           <div id="comicTitle">Loading Comic...</div>
-          <img id="comic-image" src="" alt="image2" />
+          <img id="comic-image" src="loading.gif" alt="image2" />
         </div>
       </div>
+    </div>
+    <div id="navContainer">
       <ul class="comicNav">
         <li>
-          <a href="#" onclick="firstComic()" id="first">|<</a>
+          <a href="#" id="first">|<</a>
         </li>
         <li>
           <a href="#" id="prev">< Prev</a>
@@ -61,6 +65,7 @@
           <a href="#" id="last">>|</a>
         </li>
       </ul>
+      <h2>Display number of images:</h2>
       <ul class="numDisplay">
         <li>
           <a href="#" id="single-display">1</a>
