@@ -1,6 +1,7 @@
 const firstNavButtons = Array.from(document.querySelectorAll(`#first`));
 firstNavButtons.forEach((b) => {
   b.addEventListener("click", () => {
+    hideError();
     initImageList();
     searchComic(1);
   });
@@ -9,6 +10,7 @@ firstNavButtons.forEach((b) => {
 const prevNavButtons = Array.from(document.querySelectorAll(`#prev`));
 prevNavButtons.forEach((b) => {
   b.addEventListener("click", () => {
+    hideError();
     initImageList();
     searchComic(currentComicIndex - numOfImagesDisplayed);
   });
@@ -17,6 +19,7 @@ prevNavButtons.forEach((b) => {
 const randomNavButtons = Array.from(document.querySelectorAll(`#random`));
 randomNavButtons.forEach((b) => {
   b.addEventListener("click", () => {
+    hideError();
     initImageList();
     const r = getRandomIntInclusive(1, latestComicIndex);
     searchComic(r);
@@ -26,6 +29,7 @@ randomNavButtons.forEach((b) => {
 const nextNavButtons = Array.from(document.querySelectorAll(`#next`));
 nextNavButtons.forEach((b) => {
   b.addEventListener("click", () => {
+    hideError();
     initImageList();
     searchComic(currentComicIndex + numOfImagesDisplayed);
   });
@@ -34,6 +38,7 @@ nextNavButtons.forEach((b) => {
 const lastNavButtons = Array.from(document.querySelectorAll(`#last`));
 lastNavButtons.forEach((b) => {
   b.addEventListener("click", () => {
+    hideError();
     initImageList();
     searchComic(0);
   });
@@ -45,6 +50,7 @@ const displayOptions = Array.from(
 console.log(displayOptions);
 displayOptions.forEach((option) => {
   option.addEventListener("click", () => {
+    hideError();
     const n = parseInt(option.innerHTML);
     if (numOfImagesDisplayed != n) {
       numOfImagesDisplayed = n;
