@@ -3,8 +3,12 @@ var latestComicIndex;
 var numOfImagesDisplayed = 3;
 var currentComicIndex = 0;
 
+//entry point of the script
+initImageList();
+hideError();
+searchComic(null);
+
 async function fetchComicData(url) {
-  //   const res = await fetch("http://xkcd.com/info.0.json");
   const res = await fetch(url);
   return res.json();
 }
@@ -34,7 +38,6 @@ async function loadComics(index, quantity) {
 
   const m = calcMidValue(quantity);
   let start = index - m;
-  // todo: check if starting index is negative
   if (start <= 0) {
     start += latestComicIndex;
   }
@@ -50,10 +53,6 @@ async function loadComics(index, quantity) {
 
 const searchButton = document.querySelector(`#search-submit`);
 const searchValue = document.querySelector(`#comic-search`);
-
-initImageList();
-hideError();
-searchComic(null);
 
 searchButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -74,7 +73,7 @@ function searchEvent() {
   else {
     console.log(`not a number: ${c}`);
     showError(
-      `Invalid comic id! Please enter from 1 to ${latestComicIndex}<br>(Value entered: "${searchValue.value}")`
+      `Invalid comic id! Please enter from 1 to ${latestComicIndex}<br />(Value entered: "${searchValue.value}")`
     );
     return;
   }
@@ -82,7 +81,7 @@ function searchEvent() {
   if (c < 0 || c > latestComicIndex) {
     console.log(`search out of range: ${c}`);
     showError(
-      `Comic id out of range! Please enter from 1 to ${latestComicIndex}<br>(Value entered: "${searchValue.value}")`
+      `Comic id out of range! Please enter from 1 to ${latestComicIndex}<br />(Value entered: "${searchValue.value}")`
     );
     return;
   }
@@ -91,67 +90,22 @@ function searchEvent() {
   searchComic(c);
 }
 
-// function getSearchValue() {
-//   let c = parseInt(searchValue.value);
-//   if (Number.isInteger(c)) console.log(c);
-//   else console.log(`not a number: ${c}`);
-
-//   // todo: limit number between 1 and latestComicIndex
-//   if (isNaN(c)) c = latestComicIndex;
-
-//   return c;
-// }
-
 async function searchComic(index) {
   await fetchLatestComic();
-  const comicElems = Array.from(
-    document.querySelectorAll("div[class*='aComic']")
-  );
+  const comicElems = Array.from(document.querySelectorAll("li[id*='aComic']"));
 
-  // const imageElems = Array.from(
-  //   document.querySelectorAll("img[id*='comic-image']")
-  // );
   console.log(`getting comic index ${index}`);
   const comics = await loadComics(
     index === null ? latestComicIndex : index,
     numOfImagesDisplayed
   );
   console.log(comics);
-  // imageElems.forEach((c, i) => {
-  //   c.src = comics[i].img;
-  // });
   comicElems.forEach((c, i) => {
-    c.querySelector("#comicTitle").innerHTML = comics[i].title;
-    c.querySelector("#comic-image").src = comics[i].img;
-    c.querySelector("#comic-image").alt = `num: ${comics[i].num}`;
+    c.querySelector(".comicTitle").innerHTML = comics[i].title;
+    c.querySelector(".comic-image").src = comics[i].img;
+    c.querySelector(".comic-image").alt = `num: ${comics[i].num}`;
   });
 }
-
-// (async () => {
-//   await fetchLatestComic(); // init latest comic index
-//   const imageElems = Array.from(
-//     document.querySelectorAll("img[id*='comic-image']")
-//   );
-
-//   // latest comic: 2488
-//   // display 3, middle value = 1 ( 0 1 2 )
-//   // 2487 2488 1
-//   // display 5, middle value = 2 ( 0 1 2 3 4 )
-//   // 2486 2487 2488 0 1
-//   ////////////
-//   const comics = await loadComics(1, numOfImagesDisplayed);
-//   console.log(comics);
-//   // const mid = calcMidValue(comicImages.length);
-//   // const startingIndex = latestComicIndex - mid;
-//   imageElems.forEach((c, i) => {
-//     c.src = comics[i].img;
-//   });
-
-//   // const mid = calcMidValue(comicImages.length);
-//   // console.log(comicImages.length);
-//   // console.log(`mid: ${mid}`);
-//   // comicImages[mid].src = comic.img;
-// })();
 
 function calcMidValue(length) {
   //only taking into account that length is odd
@@ -163,19 +117,16 @@ function initImageList() {
   // clear the list
   imageList.innerHTML = "";
   for (let i = 0; i < numOfImagesDisplayed; ++i) {
-    const item = document.createElement("div");
-    item.className = "column";
-    item.innerHTML = `<div class="aComic${i}">
-                        <div id="comicTitle">Loading Comic...</div>
-                        <img id="comic-image" src="loading.gif" alt="temp image ${i}" />
-                      </div>`;
+    const item = document.createElement("li");
+    item.id = `aComic${i}`;
+    item.innerHTML = `<div class="comicTitle">Loading Comic...</div>
+                      <img class="comic-image" src="loading.gif" alt="temp image ${i}" />`;
     imageList.appendChild(item);
   }
 }
 
 function showError(message) {
-  const msg = document.querySelector("#errorMessage");
-  msg.innerHTML = message;
+  document.querySelector(".errorMessage").innerHTML = message;
   document.querySelector("#errorAlert").style.display = "inline-block";
 }
 

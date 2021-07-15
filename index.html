@@ -11,19 +11,19 @@
       <h1>xkcd comic reader</h1>
       <ul class="comicNav">
         <li>
-          <a href="#" id="first">|<</a>
+          <a href="#" class="firstButton">|<</a>
         </li>
         <li>
-          <a href="#" id="prev">< Prev</a>
+          <a href="#" class="prevButton">< Prev</a>
         </li>
         <li>
-          <a href="#" id="random">Random</a>
+          <a href="#" class="randomButton">Random</a>
         </li>
         <li>
-          <a href="#" id="next">Next ></a>
+          <a href="#" class="nextButton">Next ></a>
         </li>
         <li>
-          <a href="#" id="last">>|</a>
+          <a href="#" class="lastButton">>|</a>
         </li>
       </ul>
       <form onsubmit="return false">
@@ -31,41 +31,41 @@
         <input type="submit" value="Go" id="search-submit" />
       </form>
       <div id="errorAlert">
-        <div id="errorMessage">Error message.<br />(Value entered: "")</div>
+        <div class="errorMessage">Error message.<br />(Value entered: "")</div>
       </div>
     </div>
     <div id="middleContainer">
-      <div class="row" id="image-list">
-        <div class="aComic0">
-          <div id="comicTitle">Loading Comic...</div>
-          <img id="comic-image" src="loading.gif" alt="image0" />
-        </div>
-        <div class="aComic1">
-          <div id="comicTitle">Loading Comic...</div>
-          <img id="comic-image" src="loading.gif" alt="image1" />
-        </div>
-        <div class="aComic2">
-          <div id="comicTitle">Loading Comic...</div>
-          <img id="comic-image" src="loading.gif" alt="image2" />
-        </div>
-      </div>
+      <ul class="row" id="image-list">
+        <li id="aComic0">
+          <div class="comicTitle">Loading Comic...</div>
+          <img class="comic-image" src="loading.gif" alt="image0" />
+        </li>
+        <li id="aComic1">
+          <div class="comicTitle">Loading Comic...</div>
+          <img class="comic-image" src="loading.gif" alt="image1" />
+        </li>
+        <li id="aComic2">
+          <div class="comicTitle">Loading Comic...</div>
+          <img class="comic-image" src="loading.gif" alt="image2" />
+        </li>
+      </ul>
     </div>
-    <div id="navContainer">
+    <div id="bottomContainer">
       <ul class="comicNav">
         <li>
-          <a href="#" id="first">|<</a>
+          <a href="#" class="firstButton">|<</a>
         </li>
         <li>
-          <a href="#" id="prev">< Prev</a>
+          <a href="#" class="prevButton">< Prev</a>
         </li>
         <li>
-          <a href="#" id="random">Random</a>
+          <a href="#" class="randomButton">Random</a>
         </li>
         <li>
-          <a href="#" id="next">Next ></a>
+          <a href="#" class="nextButton">Next ></a>
         </li>
         <li>
-          <a href="#" id="last">>|</a>
+          <a href="#" class="lastButton">>|</a>
         </li>
       </ul>
       <h2>Display number of comics:</h2>

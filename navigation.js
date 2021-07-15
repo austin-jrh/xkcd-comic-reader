@@ -1,4 +1,4 @@
-const firstNavButtons = Array.from(document.querySelectorAll(`#first`));
+const firstNavButtons = Array.from(document.querySelectorAll(`.firstButton`));
 firstNavButtons.forEach((b) => {
   b.addEventListener("click", () => {
     hideError();
@@ -7,7 +7,7 @@ firstNavButtons.forEach((b) => {
   });
 });
 
-const prevNavButtons = Array.from(document.querySelectorAll(`#prev`));
+const prevNavButtons = Array.from(document.querySelectorAll(`.prevButton`));
 prevNavButtons.forEach((b) => {
   b.addEventListener("click", () => {
     hideError();
@@ -16,7 +16,7 @@ prevNavButtons.forEach((b) => {
   });
 });
 
-const randomNavButtons = Array.from(document.querySelectorAll(`#random`));
+const randomNavButtons = Array.from(document.querySelectorAll(`.randomButton`));
 randomNavButtons.forEach((b) => {
   b.addEventListener("click", () => {
     hideError();
@@ -26,7 +26,7 @@ randomNavButtons.forEach((b) => {
   });
 });
 
-const nextNavButtons = Array.from(document.querySelectorAll(`#next`));
+const nextNavButtons = Array.from(document.querySelectorAll(`.nextButton`));
 nextNavButtons.forEach((b) => {
   b.addEventListener("click", () => {
     hideError();
@@ -35,7 +35,7 @@ nextNavButtons.forEach((b) => {
   });
 });
 
-const lastNavButtons = Array.from(document.querySelectorAll(`#last`));
+const lastNavButtons = Array.from(document.querySelectorAll(`.lastButton`));
 lastNavButtons.forEach((b) => {
   b.addEventListener("click", () => {
     hideError();
