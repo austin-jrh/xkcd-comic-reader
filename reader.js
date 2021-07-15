@@ -8,17 +8,36 @@ initImageList();
 hideError();
 searchComic(null);
 
+const searchButton = document.querySelector(`#search-submit`); // go button
+const searchValue = document.querySelector(`#comic-search`); // input field
+
+searchButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  searchEvent();
+});
+
+searchValue.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    searchEvent();
+  }
+});
+
+// -- function declarations start
+
 async function fetchComicData(url) {
   const res = await fetch(url);
   return res.json();
 }
 
+/// Grab the details of the latest comic
 async function fetchLatestComic() {
   const d = await fetchComicData(api_url);
   latestComicIndex = d.num;
-  console.log(`latest comic index: ${latestComicIndex}`);
+  //console.log(`latest comic index: ${latestComicIndex}`);
 }
 
+/// Load a single comic
 async function loadComic(index) {
   try {
     const data = await fetchComicData(api_url + index);
@@ -29,11 +48,11 @@ async function loadComic(index) {
   }
 }
 
+/// Load (quantity) amount of comics, where (index) is the middle comic
 async function loadComics(index, quantity) {
-  // limit the index to the correct range [0, latest]
   if (index <= 0) index += latestComicIndex;
   else if (index > latestComicIndex) index -= latestComicIndex;
-  console.log(`getting actual comic index ${index}`);
+  //console.log(`getting actual comic index ${index}`);
   currentComicIndex = index;
 
   const m = calcMidValue(quantity);
@@ -51,35 +70,22 @@ async function loadComics(index, quantity) {
   return result;
 }
 
-const searchButton = document.querySelector(`#search-submit`);
-const searchValue = document.querySelector(`#comic-search`);
-
-searchButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  searchEvent();
-});
-
-searchValue.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-
-    searchEvent();
-  }
-});
-
+/// Determine if the input field is valid comic id
 function searchEvent() {
-  let c = parseInt(searchValue.value);
-  if (Number.isInteger(c)) console.log(c);
-  else {
-    console.log(`not a number: ${c}`);
+  // regex to check if string is number
+  if (/^\d+$/.test(searchValue.value) == false) {
+    //console.log(`not a number: ${c}`);
     showError(
       `Invalid comic id! Please enter from 1 to ${latestComicIndex}<br />(Value entered: "${searchValue.value}")`
     );
     return;
   }
 
+  let c = parseInt(searchValue.value);
+  //console.log(c);
+
   if (c < 0 || c > latestComicIndex) {
-    console.log(`search out of range: ${c}`);
+    //console.log(`search out of range: ${c}`);
     showError(
       `Comic id out of range! Please enter from 1 to ${latestComicIndex}<br />(Value entered: "${searchValue.value}")`
     );
@@ -90,16 +96,17 @@ function searchEvent() {
   searchComic(c);
 }
 
+/// Jump to comic index, where (index) is a valid index
 async function searchComic(index) {
   await fetchLatestComic();
   const comicElems = Array.from(document.querySelectorAll("li[id*='aComic']"));
 
-  console.log(`getting comic index ${index}`);
+  //console.log(`getting comic index ${index}`);
   const comics = await loadComics(
     index === null ? latestComicIndex : index,
     numOfImagesDisplayed
   );
-  console.log(comics);
+  //console.log(comics);
   comicElems.forEach((c, i) => {
     c.querySelector(".comicTitle").innerHTML = comics[i].title;
     c.querySelector(".comic-image").src = comics[i].img;
@@ -107,11 +114,13 @@ async function searchComic(index) {
   });
 }
 
+/// Given the number, calculate what number is the middle (catered to arrays)
 function calcMidValue(length) {
   //only taking into account that length is odd
   return Math.floor(length * 0.5);
 }
 
+/// Replace the current comics with placeholders
 function initImageList() {
   const imageList = document.querySelector("#image-list");
   // clear the list
@@ -125,11 +134,13 @@ function initImageList() {
   }
 }
 
+/// When search is invalid, show error message
 function showError(message) {
   document.querySelector(".errorMessage").innerHTML = message;
   document.querySelector("#errorAlert").style.display = "inline-block";
 }
 
+/// When doing any other valid navigation, hide the error message
 function hideError() {
   document.querySelector("#errorAlert").style.display = "none";
 }

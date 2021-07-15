@@ -44,23 +44,26 @@ lastNavButtons.forEach((b) => {
   });
 });
 
+/// loop through all page num display buttons and assign event listener for click
 const displayOptions = Array.from(
   document.querySelectorAll("a[id*='-display']")
 );
-console.log(displayOptions);
+//console.log(displayOptions);
 displayOptions.forEach((option) => {
   option.addEventListener("click", () => {
     hideError();
     const n = parseInt(option.innerHTML);
+    // if we are selecting a different page display value
     if (numOfImagesDisplayed != n) {
       numOfImagesDisplayed = n;
-      console.log(`now displaying: ${numOfImagesDisplayed} image(s)`);
+      //console.log(`now displaying: ${numOfImagesDisplayed} image(s)`);
       initImageList();
       searchComic(currentComicIndex);
     }
   });
 });
 
+/// Rand func taken from internet
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
