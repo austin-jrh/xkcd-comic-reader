@@ -108,6 +108,11 @@ form {
   justify-content: space-around;
 }
 
+img {
+  width: 100%;
+  height: auto;
+}
+
 ul.numDisplay {
   padding: 0;
   list-style-type: none;

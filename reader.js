@@ -55,7 +55,7 @@ initImageList();
 hideError();
 searchComic(null);
 
-searchButton.addEventListener("click", function onButtonClick(e) {
+searchButton.addEventListener("click", (e) => {
   e.preventDefault();
   searchEvent();
 });
