@@ -73,14 +73,16 @@ function searchEvent() {
   if (Number.isInteger(c)) console.log(c);
   else {
     console.log(`not a number: ${c}`);
-    showError(`Invalid comic id! Please enter from 1 to ${latestComicIndex}`);
+    showError(
+      `Invalid comic id! Please enter from 1 to ${latestComicIndex}<br>(Value entered: "${searchValue.value}")`
+    );
     return;
   }
 
   if (c < 0 || c > latestComicIndex) {
     console.log(`search out of range: ${c}`);
     showError(
-      `Comic id out of range! Please enter from 1 to ${latestComicIndex}`
+      `Comic id out of range! Please enter from 1 to ${latestComicIndex}<br>(Value entered: "${searchValue.value}")`
     );
     return;
   }
@@ -172,9 +174,9 @@ function initImageList() {
 }
 
 function showError(message) {
-  const msg = document.querySelector("#errorAlert");
+  const msg = document.querySelector("#errorMessage");
   msg.innerHTML = message;
-  msg.style.display = "inline";
+  document.querySelector("#errorAlert").style.display = "inline-block";
 }
 
 function hideError() {
