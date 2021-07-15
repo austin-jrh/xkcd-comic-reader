@@ -8,21 +8,6 @@ initImageList();
 hideError();
 searchComic(null);
 
-const searchButton = document.querySelector(`#search-submit`); // go button
-const searchValue = document.querySelector(`#comic-search`); // input field
-
-searchButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  searchEvent();
-});
-
-searchValue.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    searchEvent();
-  }
-});
-
 // -- function declarations start
 
 async function fetchComicData(url) {
@@ -68,32 +53,6 @@ async function loadComics(index, quantity) {
   }
 
   return result;
-}
-
-/// Determine if the input field is valid comic id
-function searchEvent() {
-  // regex to check if string is number
-  if (/^\d+$/.test(searchValue.value) == false) {
-    //console.log(`not a number: ${c}`);
-    showError(
-      `Invalid comic id! Please enter from 1 to ${latestComicIndex}<br />(Value entered: "${searchValue.value}")`
-    );
-    return;
-  }
-
-  let c = parseInt(searchValue.value);
-  //console.log(c);
-
-  if (c < 0 || c > latestComicIndex) {
-    //console.log(`search out of range: ${c}`);
-    showError(
-      `Comic id out of range! Please enter from 1 to ${latestComicIndex}<br />(Value entered: "${searchValue.value}")`
-    );
-    return;
-  }
-  hideError();
-  initImageList();
-  searchComic(c);
 }
 
 /// Jump to comic index, where (index) is a valid index
