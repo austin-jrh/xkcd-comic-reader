@@ -1,64 +1,55 @@
-const firstNavButtons = Array.from(document.querySelectorAll(`.firstButton`));
-firstNavButtons.forEach((b) => {
+const navButtons = Array.from(document.querySelectorAll(".comicNav li"));
+navButtons.forEach((b) => {
   b.addEventListener("click", () => {
-    hideError();
-    initImageList();
-    searchComic(1);
+    bindNavEvent(b.querySelector("a[class*='Button']").className);
   });
 });
 
-const prevNavButtons = Array.from(document.querySelectorAll(`.prevButton`));
-prevNavButtons.forEach((b) => {
-  b.addEventListener("click", () => {
-    hideError();
-    initImageList();
-    searchComic(currentComicIndex - numOfImagesDisplayed);
-  });
-});
+function bindNavEvent(buttonName) {
+  reader.hideError();
+  reader.initImageList();
 
-const randomNavButtons = Array.from(document.querySelectorAll(`.randomButton`));
-randomNavButtons.forEach((b) => {
-  b.addEventListener("click", () => {
-    hideError();
-    initImageList();
-    const r = getRandomIntInclusive(1, latestComicIndex);
-    searchComic(r);
-  });
-});
+  switch (buttonName) {
+    case "firstButton":
+      reader.searchComic(1);
+      break;
 
-const nextNavButtons = Array.from(document.querySelectorAll(`.nextButton`));
-nextNavButtons.forEach((b) => {
-  b.addEventListener("click", () => {
-    hideError();
-    initImageList();
-    searchComic(currentComicIndex + numOfImagesDisplayed);
-  });
-});
+    case "prevButton":
+      reader.searchComic(
+        reader.getCurrComicIndex() - reader.getNumOfImgsDisplay()
+      );
+      break;
 
-const lastNavButtons = Array.from(document.querySelectorAll(`.lastButton`));
-lastNavButtons.forEach((b) => {
-  b.addEventListener("click", () => {
-    hideError();
-    initImageList();
-    searchComic(0);
-  });
-});
+    case "randomButton":
+      const r = getRandomIntInclusive(1, reader.getLatestComicIndex());
+      reader.searchComic(r);
+      break;
+
+    case "nextButton":
+      reader.searchComic(
+        reader.getCurrComicIndex() + reader.getNumOfImgsDisplay()
+      );
+      break;
+
+    case "lastButton":
+      reader.searchComic(0);
+      break;
+  }
+}
 
 /// loop through all page num display buttons and assign event listener for click
 const displayOptions = Array.from(
   document.querySelectorAll("a[id*='-display']")
 );
-//console.log(displayOptions);
 displayOptions.forEach((option) => {
   option.addEventListener("click", () => {
-    hideError();
+    reader.hideError();
     const n = parseInt(option.innerHTML);
     // if we are selecting a different page display value
-    if (numOfImagesDisplayed != n) {
-      numOfImagesDisplayed = n;
-      //console.log(`now displaying: ${numOfImagesDisplayed} image(s)`);
-      initImageList();
-      searchComic(currentComicIndex);
+    if (reader.getNumOfImgsDisplay() != n) {
+      reader.setNumOfImgsDisplay(n);
+      reader.initImageList();
+      reader.searchComic(reader.getCurrComicIndex());
     }
   });
 });
@@ -68,40 +59,47 @@ const searchValue = document.querySelector(`#comic-search`); // input field
 
 searchButton.addEventListener("click", (e) => {
   e.preventDefault();
-  searchEvent();
+  searchBarEvent();
 });
 
 searchValue.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
-    searchEvent();
+    searchBarEvent();
   }
 });
 
 /// Determine if the input field is valid comic id
-function searchEvent() {
+function searchBarEvent() {
   // regex to check if string is number
   if (/^\d+$/.test(searchValue.value) == false) {
-    //console.log(`not a number: ${c}`);
     showError(
-      `Invalid comic id! Please enter from 1 to ${latestComicIndex}<br />(Value entered: "${searchValue.value}")`
+      `Invalid comic id! Please enter from 1 to ${reader.getLatestComicIndex()}<br />(Value entered: "${
+        searchValue.value
+      }")`
     );
     return;
   }
 
   let c = parseInt(searchValue.value);
-  //console.log(c);
 
-  if (c < 0 || c > latestComicIndex) {
-    //console.log(`search out of range: ${c}`);
+  if (c < 0 || c > reader.getLatestComicIndex()) {
     showError(
-      `Comic id out of range! Please enter from 1 to ${latestComicIndex}<br />(Value entered: "${searchValue.value}")`
+      `Comic id out of range! Please enter from 1 to ${reader.getLatestComicIndex()}<br />(Value entered: "${
+        searchValue.value
+      }")`
     );
     return;
   }
-  hideError();
-  initImageList();
-  searchComic(c);
+  reader.hideError();
+  reader.initImageList();
+  reader.searchComic(c);
+}
+
+/// When search is invalid, show error message
+function showError(message) {
+  document.querySelector(".errorMessage").innerHTML = message;
+  document.querySelector("#errorAlert").style.display = "inline-block";
 }
 
 /// Rand func taken from internet
