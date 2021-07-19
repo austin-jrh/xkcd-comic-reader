@@ -23,14 +23,15 @@ Get through comic id: https://intro-to-js-playground.vercel.app/api/xkcd-comics/
 
 ## reader.js
 ### Variables:
--`api_url`: URL for the API
--`latestComicIndex`: keep track of what is the latest comic index
--`numOfImagesDisplayed`: keep track of how many images are being displayed right now
--`currentComicIndex`: keep track of what is the comic index of the comic displayed in the center
+- `api_url`: URL for the API
+- `latestComicIndex`: keep track of what is the latest comic index
+- `numOfImagesDisplayed`: keep track of how many images are being displayed right now
+- `currentComicIndex`: keep track of what is the comic index of the comic displayed in the center
 
 ### Functions to use:
 `searchComic(index)`
 > Populate the website with the respective comics, where the middle comic id is index.
+
 The function will first query what the latest comic is, then will load the comics needed using `loadComics(index, quentity)`. Afterwards, the comics will be loaded into the website.
 
 `hideError()`
@@ -42,6 +43,7 @@ The function will first query what the latest comic is, then will load the comic
 
 `initImageList()`
 > Clear the website and replace with corresponding HTML code as placeholder.
+
 The number of placeholder depends on the value of `numOfImagesDisplayed`.
 
 ## navigation.js
