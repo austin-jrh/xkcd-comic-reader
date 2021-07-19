@@ -5,6 +5,7 @@ This is an capstone project for a javascript course held by SUTD.
 API used (proxy): 
 Get latest comic: https://intro-to-js-playground.vercel.app/api/xkcd-comics/
 Get through comic id: https://intro-to-js-playground.vercel.app/api/xkcd-comics/<comic-id>
+
 *Proxy is used as CORS is not enabled on the official xkcd API*
 
 # Features
@@ -34,14 +35,14 @@ Get through comic id: https://intro-to-js-playground.vercel.app/api/xkcd-comics/
 
 The function will first query what the latest comic is, then will load the comics needed using `loadComics(index, quentity)`. Afterwards, the comics will be loaded into the website.
 
-`hideError()`
+### `hideError()`
 > Hide the error message when a valid navigation is done.
 
 ### Relevant functions:
-`loadComics(index, quantity)`
+### `loadComics(index, quantity)`
 > Returns an array of data fetched from the API, where `index` is the middle index of the comic and `quantity` is the amount of comics to retrieve.
 
-`initImageList()`
+### `initImageList()`
 > Clear the website and replace with corresponding HTML code as placeholder.
 
 The number of placeholder depends on the value of `numOfImagesDisplayed`.
@@ -50,5 +51,5 @@ The number of placeholder depends on the value of `numOfImagesDisplayed`.
 This file contains code to bind the navigation buttons on the website. The code gathers the respective buttons and attaches the correct event through `addEventListener`
 
 ### Functions to use:
-`showError(message)`
+### `showError(message)`
 > Show an error message below the search bar.
