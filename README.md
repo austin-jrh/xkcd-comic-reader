@@ -32,9 +32,9 @@ API used (proxy):
 
 ### Functions to use:
 ### `searchComic(index)`
-> Populate the website with the respective comics, where the middle comic id is index.
+> Populate the website with the respective comics, where the middle comic id is `index`.
 
-The function will first query what the latest comic is, then will load the comics needed using `loadComics(index, quentity)`. Afterwards, the comics will be loaded into the website.
+The function will first query what the latest comic is, then will load the comics needed using `loadComics(index, quentity)`. The function will determine how many comics to load by using the variable `numOfImagesDisplayed`. Afterwards, the comics will be loaded into the website.
 
 ### `hideError()`
 > Hide the error message when a valid navigation is done.
@@ -49,7 +49,9 @@ The function will first query what the latest comic is, then will load the comic
 The number of placeholder depends on the value of `numOfImagesDisplayed`.
 
 ## navigation.js
-This file contains code to bind the navigation buttons on the website. The code gathers the respective buttons and attaches the correct event through `addEventListener`.
+This file contains code to bind the navigation buttons on the website. The code gathers the respective buttons and attaches the correct event through `addEventListener`. 
+
+The navigation events relies on the `currentComicIndex`, `latestComicIndex`, and `numOfImagesDisplayed` which resides in `reader.js`.
 
 ### Functions to use:
 ### `showError(message)`
