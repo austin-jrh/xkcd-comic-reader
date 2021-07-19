@@ -29,7 +29,7 @@ Get through comic id: https://intro-to-js-playground.vercel.app/api/xkcd-comics/
 - `currentComicIndex`: keep track of what is the comic index of the comic displayed in the center
 
 ### Functions to use:
-`searchComic(index)`
+### `searchComic(index)`
 > Populate the website with the respective comics, where the middle comic id is index.
 
 The function will first query what the latest comic is, then will load the comics needed using `loadComics(index, quentity)`. Afterwards, the comics will be loaded into the website.
