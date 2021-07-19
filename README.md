@@ -3,11 +3,11 @@
 This is an capstone project for a javascript course held by SUTD. 
 
 API used (proxy): 
-Get latest comic: https://intro-to-js-playground.vercel.app/api/xkcd-comics/ .
 
-Get through comic id: https://intro-to-js-playground.vercel.app/api/xkcd-comics/ < comic-id > .
+- Get latest comic: https://intro-to-js-playground.vercel.app/api/xkcd-comics/ .
+- Get through comic id: https://intro-to-js-playground.vercel.app/api/xkcd-comics/ < comic-id > .
 
-*Proxy is used as CORS is not enabled on the official xkcd API.*
+*A proxy is being used instead as CORS is not enabled on the official xkcd API.*
 
 # Features
 - Display comics with comic title, comic image.
