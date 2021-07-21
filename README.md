@@ -56,3 +56,11 @@ The navigation events relies on the `currentComicIndex`, `latestComicIndex`, and
 ### Functions to use:
 ### `showError(message)`
 > Show an error message below the search bar.
+
+# Future improvements
+
+Other improvements that can be done to the project:
+
+- Have a clear division between the comics when more than 1 comic is being displayed.
+- Able to save the state of the site when hitting refresh (probably requires use of backend? idk needs further research).
+  - At the moment, the default state of the site when hitting refresh is 3 comics displayed, where the middle comic is always the latest comic fetched from API.
