@@ -5,7 +5,7 @@ This is an capstone project for a javascript course held by SUTD.
 API used (proxy): 
 
 - Get latest comic: https://intro-to-js-playground.vercel.app/api/xkcd-comics/ .
-- Get through comic id: https://intro-to-js-playground.vercel.app/api/xkcd-comics/ < comic-id > .
+- Get latest comic through comic id: https://intro-to-js-playground.vercel.app/api/xkcd-comics/ < comic-id > .
 
 *A proxy is being used instead as CORS is not enabled on the official xkcd API.*
 
@@ -21,11 +21,11 @@ API used (proxy):
 - `index.html`: contains html code for displaying website.
 - `stylesheet.css`: contains css code for style.
 - `reader.js`: contains code for fetching and showing the comics via proxy API.
-- `navigation.js`: contains code to bind the navigation buttons.
+- `navigation.js`: contains code to bind the navigation buttons to respective events.
 
 ## reader.js
 ### Variables:
-- `api_url`: URL for the API
+- `api_url`: URL for the API.
 - `latestComicIndex`: keep track of what is the latest comic index.
 - `numOfImagesDisplayed`: keep track of how many images are being displayed right now.
 - `currentComicIndex`: keep track of what is the comic index of the comic displayed in the center.
