@@ -60,12 +60,17 @@ let reader = (function () {
     if (start <= 0) {
       start += latestComicIndex;
     }
-    let result = [];
+    let result = []; //the comics to be returned
+    let promises = []; //array to store the promises
     for (let i = 0; i < quantity; ++i) {
       let index = start + i;
       if (index > latestComicIndex) index -= latestComicIndex;
-      result[i] = await loadComic(index);
+      promises[i] = loadComic(index); //get all the promises to be done
     }
+
+    await Promise.all(promises).then((pResults) => {
+      result = pResults;
+    });
 
     return result;
   }
@@ -81,6 +86,7 @@ let reader = (function () {
       index === null ? latestComicIndex : index,
       numOfImagesDisplayed
     );
+
     comicElems.forEach((c, i) => {
       c.querySelector(".comicTitle").innerHTML = comics[i].title;
       c.querySelector(".comic-image").src = comics[i].img;
