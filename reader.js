@@ -91,6 +91,7 @@ let reader = (function () {
       c.querySelector(".comicTitle").innerHTML = comics[i].title;
       c.querySelector(".comic-image").src = comics[i].img;
       c.querySelector(".comic-image").alt = `num: ${comics[i].num}`;
+      c.querySelector(".comicNumber").innerHTML = `comic #${comics[i].num}`;
     });
   }
 
@@ -109,7 +110,8 @@ let reader = (function () {
       const item = document.createElement("li");
       item.id = `aComic${i}`;
       item.innerHTML = `<div class="comicTitle">Loading Comic...</div>
-                      <img class="comic-image" src="loading.gif" alt="temp image ${i}" />`;
+                      <img class="comic-image" src="loading.gif" alt="temp image ${i}" />
+                      <div class="comicNumber">loading comic number...</div>`;
       imageList.appendChild(item);
     }
   }
