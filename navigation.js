@@ -1,3 +1,4 @@
+/// Grab all list elements under the comicNav class
 const navButtons = Array.from(document.querySelectorAll(".comicNav li"));
 navButtons.forEach((b) => {
   b.addEventListener("click", () => {
@@ -5,6 +6,7 @@ navButtons.forEach((b) => {
   });
 });
 
+/// Bind the navigation event depending on the name in the button
 function bindNavEvent(buttonName) {
   reader.hideError();
   reader.initImageList();
