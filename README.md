@@ -63,6 +63,6 @@ The navigation events relies on the `currentComicIndex`, `latestComicIndex`, and
 
 Other improvements that can be done to the project:
 
-- Have a clear division between the comics when more than 1 comic is being displayed.
+- Use `overflow` to scroll through the comics instead of scrolling the whole site. (Attempted but content gets cut off, unsuccessful).
 - Able to save the state of the site when hitting refresh (probably requires use of backend? idk needs further research).
   - At the moment, the default state of the site when hitting refresh is 3 comics displayed, where the middle comic is always the latest comic fetched from API.
