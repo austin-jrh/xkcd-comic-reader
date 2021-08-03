@@ -2,6 +2,8 @@
 
 This is an capstone project for a javascript course held by SUTD. 
 
+Deployed webpage: https://austin-jrh.github.io/xkcd-comic-reader/ .
+
 API used (proxy): 
 
 - Get latest comic: https://intro-to-js-playground.vercel.app/api/xkcd-comics/ .
